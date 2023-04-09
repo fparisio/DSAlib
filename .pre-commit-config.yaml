@@ -45,6 +45,7 @@ repos:
         entry: poetry run pylint
         language: python
         types: [python]
+        exclude: ^test/
         additional_dependencies: ["pylint"]
         args: ["--rcfile=git-hooks/pylint.ini"]
   - repo: local
@@ -54,6 +55,7 @@ repos:
         entry: poetry run mypy
         language: python
         types: [python]
+        exclude: ^test/
         additional_dependencies: ["mypy"]
         args: ["--config-file=git-hooks/mypy.ini"]
   - repo: local
