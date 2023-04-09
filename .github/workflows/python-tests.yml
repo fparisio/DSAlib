@@ -25,5 +25,16 @@ jobs:
           echo "$(python3 -m site --user-base)/bin" >> $GITHUB_PATH
           poetry install
 
-      - name: Run pytest
-        run: poetry run pytest test
+      - name: Run pytest with coverage
+        run: poetry run pytest --cov=dsalib --cov-report=xml:coverage.xml test
+
+      - name: Generate coverage badge
+        run: poetry run coverage-badge -o coverage.svg -f
+
+      - name: Commit coverage badge
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add coverage.svg
+          git commit -m "Update coverage badge" -a || true
+          git push || true
