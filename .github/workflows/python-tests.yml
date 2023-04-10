@@ -26,15 +26,13 @@ jobs:
           poetry install
 
       - name: Run pytest with coverage
-        run: poetry run pytest --cov=dsalib --cov-report=xml:coverage.xml test
+        run: poetry run pytest --cov=dsalib --cov-report=xml:coverage.xml test && poetry run coverage-badge -o coverage.svg -f
 
-      - name: Generate coverage badge
-        run: poetry run coverage-badge -o coverage.svg -f
-
-      - name: Commit coverage badge
-        run: |
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
-          git add coverage.svg
-          git commit -m "Update coverage badge" -a || true
-          git push || true
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v3
+        with:
+          file: ./coverage.xml
+          token: ${{ secrets.CODECOV_TOKEN }}
+          flags: unittests
+          name: codecov-umbrella
+          yml: ./codecov.yml # Optional if your repository contains a custom codecov.yml
