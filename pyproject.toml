@@ -3,6 +3,9 @@ name = "dsalib"
 version = "0.1.0"
 description = "A basic library for Data Structure and Algorithms"
 authors = ["Francesco Parisio <francesco.parisio@protonmail.com>"]
+packages = [
+    { include = "dsalib"},
+]
 
 [tool.poetry.dependencies]
 python = "~3.8.1"
