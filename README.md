@@ -1,5 +1,5 @@
 ![CI Build](https://github.com/fparisio/DSAlib/actions/workflows/python-tests.yml/badge.svg)
-![Test Coverage](./coverage.svg)
+[![Test Coverage](https://codecov.io/gh/fparisio/DSAlib/branch/main/graph/badge.svg)](https://codecov.io/gh/fparisio/DSAlib)
 
 # DSAlib
 
