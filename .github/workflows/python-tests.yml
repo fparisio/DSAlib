@@ -26,7 +26,7 @@ jobs:
           poetry install
 
       - name: Run pytest with coverage
-        run: poetry run pytest --cov=dsalib --cov-report=xml:coverage.xml test
+        run: poetry run pytest --cov=dsalib --cov-report=xml:coverage.xml test && poetry run coverage-badge -o coverage.svg -f
 
       - name: Generate coverage badge
         run: poetry run coverage-badge -o coverage.svg -f
