@@ -28,16 +28,15 @@ jobs:
       - name: Run pytest with coverage
         run: poetry run pytest --cov=dsalib --cov-report=xml:coverage.xml test && poetry run coverage-badge -o coverage.svg -f
 
-      - name: Generate coverage badge
-        run: poetry run coverage-badge -o coverage.svg -f
-
-      - name: Commit coverage badge
+      - name: Creating coverage folder
         run: |
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
-          git stash || true
-          git checkout -b coverage-badge || git checkout coverage-badge
-          git stash apply || true
-          git add coverage.svg
-          git commit -m "Update coverage badge" -a || true
-          git push -f origin coverage-badge || true
+          mkdir -p coverage
+      - name: Coverage Bagdge
+        uses: tj-actions/coverage-badge-py@v1.8
+        with:
+          output: coverage/coverage.svg
+      - name: Publish coverage report to coverage-badge branch
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: coverage-badge
+          folder: coverage
