@@ -28,10 +28,11 @@ jobs:
       - name: Run pytest with coverage
         run: poetry run pytest --cov=dsalib --cov-report=xml:coverage.xml test && poetry run coverage-badge -o coverage.svg -f
 
-      - name: Upload coverage badge to repository
-        run: |
-          curl -X PUT \
-              -H "Authorization: token ${{ secrets.GH_TOKEN }}" \
-              -H "Content-Type: image/svg+xml" \
-              --data-binary @coverage.svg \
-              "https://api.github.com/repos/${{ github.repository }}/contents/coverage.svg?message=Update%20coverage%20badge"
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v3
+        with:
+          file: ./coverage.xml
+          token: ${{ secrets.CODECOV_TOKEN }}
+          flags: unittests
+          name: codecov-umbrella
+          yml: ./codecov.yml # Optional if your repository contains a custom codecov.yml
