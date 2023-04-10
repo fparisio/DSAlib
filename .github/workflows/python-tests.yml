@@ -28,15 +28,10 @@ jobs:
       - name: Run pytest with coverage
         run: poetry run pytest --cov=dsalib --cov-report=xml:coverage.xml test && poetry run coverage-badge -o coverage.svg -f
 
-      - name: Creating coverage folder
+      - name: Upload coverage badge to repository
         run: |
-          mkdir -p coverage
-      - name: Coverage Bagdge
-        uses: tj-actions/coverage-badge-py@v1.8
-        with:
-          output: coverage/coverage.svg
-      - name: Publish coverage report to coverage-badge branch
-        uses: JamesIves/github-pages-deploy-action@v4
-        with:
-          branch: coverage-badge
-          folder: coverage
+          curl -X PUT \
+              -H "Authorization: token ${{ secrets.GH_TOKEN }}" \
+              -H "Content-Type: image/svg+xml" \
+              --data-binary @coverage.svg \
+              "https://api.github.com/repos/${{ github.repository }}/contents/coverage.svg?message=Update%20coverage%20badge"

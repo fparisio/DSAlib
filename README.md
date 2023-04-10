@@ -1,5 +1,5 @@
 ![Python Tests](https://github.com/fparisio/DSAlib/actions/workflows/python-tests.yml/badge.svg)
-![Coverage](https://raw.githubusercontent.com/fparisio/DSAlib/coverage-badge/coverage.svg?raw=true)
+![Test Coverage](./coverage.svg)
 
 # DSAlib
 
