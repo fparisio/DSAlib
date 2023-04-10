@@ -1,2 +1,5 @@
+"""Node class for data structures."""
+
+
 class Node:
-    pass
+    """Node class for data structures."""

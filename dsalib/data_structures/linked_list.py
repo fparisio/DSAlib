@@ -1,5 +1,5 @@
-from .node import Node
+"""Module for the LinkedList class."""
 
 
 class LinkedList:
-    pass
+    """Linked list data structure."""
